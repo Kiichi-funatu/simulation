@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\ProfileController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,4 +18,17 @@ use App\Http\Controllers\RegisterController;
 Route::post('/register', [RegisterController::class, 'store']);
 Route::get('/register', function () {
     return view('auth.register');
+});
+
+
+Route::middleware(['auth'])->group(function () {
+
+    // プロフィール表示
+    Route::get('/mypage', [ProfileController::class, 'index'])->name('mypage');
+
+    // プロフィール編集画面
+    Route::get('/mypage/profile', [ProfileController::class, 'edit'])->name('mypage.edit');
+
+    // プロフィール更新処理
+    Route::post('/mypage/profile', [ProfileController::class, 'update'])->name('mypage.update');
 });
