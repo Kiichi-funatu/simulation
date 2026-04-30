@@ -1,27 +1,90 @@
-<h1>プロフィール編集</h1>
+@extends('layouts.app')
 
-<form action="{{ route('mypage.update') }}" method="POST">
-    @csrf
+@section('css')
+<link rel="stylesheet" href="{{ asset('css/profile.css') }}">
+@endsection
 
-    <div>
-        <label>ユーザー名</label>
-        <input type="text" name="name" value="{{ $user->name }}">
-    </div>
+@section('content')
+<main class="register-main">
+    <div class="profile-edit-container">
 
-    <div>
-        <label>郵便番号</label>
-        <input type="text" name="postal_code" value="{{ $user->postal_code }}">
-    </div>
+    <h2 class="title">プロフィール設定</h2>
 
-    <div>
-        <label>住所</label>
-        <input type="text" name="address" value="{{ $user->address }}">
-    </div>
+    <form action="{{ route('mypage.update') }}" method="POST" enctype="multipart/form-data" class="register-form">
+        @csrf
 
-    <div>
-        <label>建物名</label>
-        <input type="text" name="building" value="{{ $user->building }}">
-    </div>
+        {{-- プロフィール画像 --}}
+        <div class="image-area">
+            <img id="preview" 
+                 src="{{ $user->profile_image ? asset('storage/'.$user->profile_image) : '/default.png' }}" 
+                 class="profile-image">
 
-    <button type="submit">更新</button>
-</form>
+            <label class="image-select-btn">
+                画像を選択する
+                <input type="file" name="profile_image" id="imageInput" hidden>
+            </label>
+        </div>
+        
+
+            <div class="form-group">
+                <label class="form-label">ユーザー名</label>
+                <input type="text" name="name" class="form-input" required>
+                @error('password')
+                    <div class="error-message">{{ $message }}</div>
+                @enderror
+            </div>
+            <div class="form-group">
+                <label class="form-label">郵便番号</label>
+                <input type="text" name="postal_code" class="form-input" required>
+                @error('password')
+                    <div class="error-message">{{ $message }}</div>
+                @enderror
+            </div>
+            <div class="form-group">
+                <label class="form-label">住所</label>
+                <input type="text" name="address" class="form-input" required>
+                @error('password')
+                    <div class="error-message">{{ $message }}</div>
+                @enderror
+            </div>
+            <div class="form-group">
+                <label class="form-label">建物名</label>
+                <input type="text" name="building" class="form-input" required>
+                @error('password')
+                    <div class="error-message">{{ $message }}</div>
+                @enderror
+            </div>
+
+            <div class="form-button-area">
+                <button type="submit" class="submit-button">更新する</button>
+            </div>
+
+        <!--{{-- ユーザー名 --}}
+        <label class="form-label">ユーザー名</label>
+        <input type="text" name="name" class="form-input"
+               value="{{ old('name', $user->name) }}">
+
+        {{-- 郵便番号 --}}
+        <label class="form-label">郵便番号</label>
+        <input type="text" name="postal_code" class="form-input"
+               value="{{ old('postal_code', $user->postal_code) }}">
+
+        {{-- 住所 --}}
+        <label class="form-label">住所</label>
+        <input type="text" name="address" class="form-input"
+               value="{{ old('address', $user->address) }}">
+
+        {{-- 建物名 --}}
+        <label class="form-label">建物名</label>
+        <input type="text" name="building" class="form-input"
+               value="{{ old('building', $user->building) }}">
+
+        <button type="submit" class="save-btn">更新する</button>
+        -->
+    </form>
+
+</div>
+
+</main>
+
+@endsection

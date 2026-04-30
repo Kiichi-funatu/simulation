@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title', 'FashionablyLate')</title>
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+    @yield('css')
 </head>
 <body>
 
@@ -16,7 +17,7 @@
 
     {{-- 中央：検索フォーム --}}
     <div class="header__center">
-        <form action="{{ route('search') }}" method="GET" class="search-form">
+        <form action="" method="GET" class="search-form">
             <input type="text" name="keyword" class="search-input" placeholder="何をお探しですか？">
         </form>
     </div>
@@ -30,7 +31,7 @@
             <button type="submit" class="header-link logout-btn">ログアウト</button>
         </form>
 
-        <a href="{{ route('product.create') }}" class="header-link">出品</a>
+        <a href="" class="header-link-last">出品</a>
     </div>
 </header>
 
