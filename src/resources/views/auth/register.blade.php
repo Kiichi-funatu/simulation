@@ -20,7 +20,7 @@
 
             <div class="form-group">
                 <label class="form-label">ユーザー名</label>
-                <input type="text" name="name" class="form-input" required>
+                <input type="text" name="name" class="form-input" value="{{ old('name') }}">
                 @error('name')
                     <div class="error-message">{{ $message }}</div>
                 @enderror
@@ -28,7 +28,7 @@
 
             <div class="form-group">
                 <label class="form-label">メールアドレス</label>
-                <input type="email" name="email" class="form-input" required>
+                <input type="email" name="email" class="form-input" value="{{ old('email') }}">
                 @error('email')
                     <div class="error-message">{{ $message }}</div>
                 @enderror
@@ -36,7 +36,7 @@
 
             <div class="form-group">
                 <label class="form-label">パスワード</label>
-                <input type="password" name="password" class="form-input" required>
+                <input type="password" name="password" class="form-input">
                 @error('password')
                     <div class="error-message">{{ $message }}</div>
                 @enderror
@@ -44,7 +44,10 @@
 
             <div class="form-group">
                 <label class="form-label">確認用パスワード</label>
-                <input type="password" name="password_confirmation" class="form-input" required>
+                <input type="password" name="password_confirmation" class="form-input">
+                @error('password_confirmation')
+                    <div class="error-message">{{ $message }}</div>
+                @enderror
             </div>
 
             <div class="form-button-area">

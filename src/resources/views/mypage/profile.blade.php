@@ -23,34 +23,38 @@
                 画像を選択する
                 <input type="file" name="profile_image" id="imageInput" hidden>
             </label>
+
+            @error('profile_image')
+                <div class="error-message">{{ $message }}</div>
+            @enderror
         </div>
         
 
             <div class="form-group">
                 <label class="form-label">ユーザー名</label>
-                <input type="text" name="name" class="form-input" required>
-                @error('password')
+                <input type="text" name="name" class="form-input" value="{{ old('name', $user->name) }}">
+                @error('name')
                     <div class="error-message">{{ $message }}</div>
                 @enderror
             </div>
             <div class="form-group">
                 <label class="form-label">郵便番号</label>
-                <input type="text" name="postal_code" class="form-input" required>
-                @error('password')
+                <input type="text" name="postal_code" class="form-input" value="{{ old('postal_code', $user->postal_code) }}">
+                @error('postal_code')
                     <div class="error-message">{{ $message }}</div>
                 @enderror
             </div>
             <div class="form-group">
                 <label class="form-label">住所</label>
-                <input type="text" name="address" class="form-input" required>
-                @error('password')
+                <input type="text" name="address" class="form-input" value="{{ old('address', $user->address) }}">
+                @error('address')
                     <div class="error-message">{{ $message }}</div>
                 @enderror
             </div>
             <div class="form-group">
                 <label class="form-label">建物名</label>
-                <input type="text" name="building" class="form-input" required>
-                @error('password')
+                <input type="text" name="building" class="form-input" value="{{ old('building', $user->building) }}">
+                @error('building')
                     <div class="error-message">{{ $message }}</div>
                 @enderror
             </div>
@@ -59,28 +63,6 @@
                 <button type="submit" class="submit-button">更新する</button>
             </div>
 
-        <!--{{-- ユーザー名 --}}
-        <label class="form-label">ユーザー名</label>
-        <input type="text" name="name" class="form-input"
-               value="{{ old('name', $user->name) }}">
-
-        {{-- 郵便番号 --}}
-        <label class="form-label">郵便番号</label>
-        <input type="text" name="postal_code" class="form-input"
-               value="{{ old('postal_code', $user->postal_code) }}">
-
-        {{-- 住所 --}}
-        <label class="form-label">住所</label>
-        <input type="text" name="address" class="form-input"
-               value="{{ old('address', $user->address) }}">
-
-        {{-- 建物名 --}}
-        <label class="form-label">建物名</label>
-        <input type="text" name="building" class="form-input"
-               value="{{ old('building', $user->building) }}">
-
-        <button type="submit" class="save-btn">更新する</button>
-        -->
     </form>
 
 </div>

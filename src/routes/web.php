@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ItemController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,7 +22,7 @@ Route::get('/register', function () {
 });
 
 
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['auth', 'profile.complete'])->group(function () {
 
     // プロフィール表示
     Route::get('/mypage', [ProfileController::class, 'index'])->name('mypage');
@@ -32,3 +33,5 @@ Route::middleware(['auth'])->group(function () {
     // プロフィール更新処理
     Route::post('/mypage/profile', [ProfileController::class, 'update'])->name('mypage.update');
 });
+
+Route::get('/', [ItemController::class, 'index'])->name('items.index');

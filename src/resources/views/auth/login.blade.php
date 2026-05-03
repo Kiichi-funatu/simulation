@@ -20,7 +20,7 @@
 
             <div class="form-group">
                 <label class="form-label">メールアドレス</label>
-                <input type="email" name="email" class="form-input" value="{{ old('email') }}" required autofocus>
+                <input type="email" name="email" class="form-input" value="{{ old('email') }}" autofocus>
                 @error('email')
                     <div class="error-message">{{ $message }}</div>
                 @enderror
@@ -28,7 +28,7 @@
 
             <div class="form-group">
                 <label class="form-label">パスワード</label>
-                <input type="password" name="password" class="form-input" required>
+                <input type="password" name="password" class="form-input">
                 @error('password')
                     <div class="error-message">{{ $message }}</div>
                 @enderror

@@ -47,7 +47,10 @@
     border: 1px solid;
 }
 
-.error-message {}
+.error-message {
+    color: red;
+    font-size: 14px;
+}
 
 .form-button-area {}
 
