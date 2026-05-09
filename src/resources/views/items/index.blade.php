@@ -15,8 +15,14 @@
             <a href="{{ route('items.show', $item->id) }}" class="item-card">
 
                 <div class="item-image-area">
-                    <img src="{{ $item->image ? asset('storage/'.$item->image->path) : '/noimage.png' }}"
-                         class="item-image">
+
+                    {{-- 画像がある場合 --}}
+                    @if($item->images->isNotEmpty())
+                        <img src="{{ $item->images[0]->image_path }}" class="item-image">
+                    @else
+                        <img src="/noimage.png" class="item-image">
+                    @endif
+
                 </div>
 
                 <p class="item-name">{{ $item->name }}</p>

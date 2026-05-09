@@ -1,0 +1,233 @@
+.item-detail-main {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 40px 0;
+}
+
+.item-detail-container {
+    width: 900px;
+    display: flex;
+    gap: 40px;
+}
+
+.item-image-area {
+    width: 50%;
+}
+
+.main-image {
+    width: 100%;
+    border-radius: 8px;
+}
+
+.item-info-area {
+    width: 50%;
+}
+
+.item-name {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.item-price {
+    font-size: 28px;
+    font-weight: bold;
+    color: #e60023;
+    margin-bottom: 20px;
+}
+
+.tax-text {
+    font-size: 15px;      /* 小さくする */
+    color: #333;          /* 少し薄いグレー */
+    margin-left: 4px;     /* 価格との間に少し余白 */
+}
+
+.item-description {
+    margin-bottom: 20px;
+    line-height: 1.6;
+}
+
+.item-meta .label {
+    font-weight: bold;
+}
+
+.favorite-button {
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.favorite-button.liked {
+    color: red;
+}
+
+.icon {
+    width: 24px;
+    height: 24px;
+    vertical-align: middle;
+    margin-right: 4px;
+}
+
+.item-icons {
+    display: flex;
+    gap: 20px; /* アイコン同士の間隔 */
+}
+
+.favorite-button,
+.comment-button {
+    display: flex;
+    flex-direction: column; /* アイコンの下に数字を置く */
+    align-items: center;    /* 中央揃え */
+    text-decoration: none;
+    border: none;
+    background: none;
+    cursor: pointer;
+}
+
+.favorite-button.liked .liked-icon {
+    filter: hue-rotate(-20deg) saturate(2);
+}
+
+
+.purchase-button {
+    display: block;
+    width: 100%;
+    padding: 16px 0;
+    background-color: #FF5555; 
+    color: #fff;
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    border-radius: 8px;
+    text-decoration: none;
+    margin-top: 24px;
+    transition: background-color 0.2s ease;
+}
+
+.purchase-button:hover {
+    background-color: #cc001f; /* 少し暗く */
+}
+
+.purchase-button:active {
+    background-color: #b8001b; /* 押した時 */
+}
+
+.info-value {
+    background-color: #f2f2f2; /* 薄い灰色 */
+    padding: 6px 14px;
+    border-radius: 20px; 
+    display: inline-block;
+    font-size: 14px;
+    color: #333;
+}
+
+.info-value2 {
+    padding: 6px 14px;
+    border-radius: 20px; 
+    display: inline-block;
+    font-size: 14px;
+    color: #333;
+}
+
+/* コメント全体を item-info-area と同じ縦並びにする */
+.comment-section {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;        /* item-info-area と同じ幅 */
+    margin-top: 40px;   /* 商品情報との余白 */
+}
+
+/* コメント1件 */
+.comment-box {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 12px 0;
+    border-bottom: 1px solid #eee;
+}
+
+/* コメントユーザー情報 */
+.comment-user {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.user-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%; /* ← 丸くする */
+    object-fit: cover;
+}
+
+/* プロフィール画像がない場合の灰色の丸 */
+.default-icon {
+    background-color: #ccc; /* 薄いグレー */
+}
+
+/* コメント内容 */
+.comment-content {
+    font-size: 14px;
+    line-height: 1.6;
+    color: #333;
+}
+
+/* コメントが空のときの placeholder */
+.comment-content:empty::before {
+    content: "（こちらにコメントが入ります。）";
+    color: #aaa; /* 薄い灰色 */
+}
+
+/* コメント投稿フォーム */
+.comment-form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.comment-input {
+    width: 100%;
+    height: 100px;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    resize: vertical;
+    font-size: 14px;
+}
+
+/* コメント送信ボタンを購入ボタンと同じデザインにする */
+.comment-submit {
+    display: block;
+    width: 100%;
+    padding: 16px 0;
+    background-color: #FF5555; /* 購入ボタンと同じ赤 */
+    color: #fff;
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    border-radius: 8px;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    margin-top: 16px;
+    transition: background-color 0.2s ease;
+}
+
+.comment-submit:hover {
+    background-color: #e04a4a; /* 購入ボタンと同じホバー色 */
+}
+
+.comment-submit:active {
+    background-color: #c43f3f; /* 押した時 */
+}
+
+.error-message {
+    color: red;
+    font-size: 13px;
+}
+
+
+

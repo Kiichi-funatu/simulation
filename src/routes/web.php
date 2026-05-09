@@ -4,6 +4,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ItemController;
+use App\Http\Controllers\PurchaseController;
+use App\Http\Controllers\FavoriteController;
+use App\Http\Controllers\CommentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,3 +38,15 @@ Route::middleware(['auth', 'profile.complete'])->group(function () {
 });
 
 Route::get('/', [ItemController::class, 'index'])->name('items.index');
+
+Route::get('/items/{id}', [ItemController::class, 'show'])->name('items.show');
+
+Route::get('/purchase/{id}', [PurchaseController::class, 'index'])->name('purchase.index');
+
+Route::post('/favorite/{id}', [FavoriteController::class, 'store'])->name('favorite.store');
+
+Route::delete('/favorite/{id}', [FavoriteController::class, 'destroy'])->name('favorite.destroy');
+
+Route::post('/items/{id}/comment', [CommentController::class, 'store'])
+    ->middleware('auth')
+    ->name('comments.store');
