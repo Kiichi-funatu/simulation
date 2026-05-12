@@ -1,0 +1,76 @@
+.mypage-container {
+    width: 90%;
+    margin: 0 auto 20px;
+}
+
+.profile-header {
+    display: flex;
+    align-items: center;
+    gap: 28px; /* ← 画像とユーザー名の間隔を広げる */
+    padding: 20px 50px 0;
+}
+
+.profile-image {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.profile-info {
+    flex: 1;
+}
+
+.profile-row {
+    display: flex;
+    align-items: center;
+    gap: 24px; /* ← ユーザー名と編集ボタンの間隔を広げる */
+    justify-content: space-between;
+}
+
+.profile-name {
+    margin: 0;
+    font-size: 25px;
+}
+
+.edit-btn {
+    padding: 5px 19px;
+    border: 2px solid #ff4d4d;
+    color: #ff4d4d;
+    border-radius: 7px;
+    text-decoration: none;
+    font-size: 17px;
+    background: #fff;
+    font-weight: bold;
+}
+
+/* タブ（テキストタブ＋下線） */
+.mypage-tabs {
+    width: 90%;
+    margin: 0 auto 10px;
+    display: flex;
+    border-bottom: 1px solid #ddd;
+}
+
+.mypage-tab {
+    padding: 10px 16px;
+    border: none;
+    background: transparent;
+    font-size: 14px;
+    color: #666;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.mypage-tab.active {
+    color: #ff4d4d;
+}
+
+/* コンテンツ表示切り替え */
+.tab-content {
+    display: none;
+}
+
+.tab-content.active {
+    display: block;
+}

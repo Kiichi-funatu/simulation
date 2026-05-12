@@ -24,9 +24,16 @@ Route::get('/register', function () {
     return view('auth.register');
 });
 
+Route::get('/', [ItemController::class, 'index'])->name('items.index');
+Route::get('/items/{id}', [ItemController::class, 'show'])->name('items.show');
 
 Route::middleware(['auth', 'profile.complete'])->group(function () {
+    Route::get('/purchase/{id}', [PurchaseController::class, 'index'])->name('purchase.index');
+});
 
+
+// 🔐 ログイン必須
+Route::middleware('auth')->group(function () {
     // プロフィール表示
     Route::get('/mypage', [ProfileController::class, 'index'])->name('mypage');
 
@@ -35,18 +42,16 @@ Route::middleware(['auth', 'profile.complete'])->group(function () {
 
     // プロフィール更新処理
     Route::post('/mypage/profile', [ProfileController::class, 'update'])->name('mypage.update');
+
+    Route::post('/favorite/{id}', [FavoriteController::class, 'store'])->name('favorite.store');
+
+    Route::delete('/favorite/{id}', [FavoriteController::class, 'destroy'])->name('favorite.destroy');
+
+    Route::post('/items/{id}/comment', [CommentController::class, 'store'])->name('comments.store');
+
+    Route::post('/sell', [ItemController::class, 'store'])->name('sell.store');
+
+    Route::get('/sell', function() {
+        return view('sell'); // <- 出品画面のblade
+    })->name('sell');
 });
-
-Route::get('/', [ItemController::class, 'index'])->name('items.index');
-
-Route::get('/items/{id}', [ItemController::class, 'show'])->name('items.show');
-
-Route::get('/purchase/{id}', [PurchaseController::class, 'index'])->name('purchase.index');
-
-Route::post('/favorite/{id}', [FavoriteController::class, 'store'])->name('favorite.store');
-
-Route::delete('/favorite/{id}', [FavoriteController::class, 'destroy'])->name('favorite.destroy');
-
-Route::post('/items/{id}/comment', [CommentController::class, 'store'])
-    ->middleware('auth')
-    ->name('comments.store');

@@ -27,7 +27,8 @@ class EnsureProfileIsComplete
         if (is_null($user->address)) {
             //ただし、プロフィール設定画面にいる時はスルー
             if (!$request->is('mypage/profile')) {
-                return redirect('/mypage/profile');
+                ///mypage に飛ばされていたので return redirect('/mypage/profile');
+                return redirect('/profile');
             }
         }
         

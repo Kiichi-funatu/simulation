@@ -17,8 +17,8 @@
 
     {{-- 中央：検索フォーム --}}
     <div class="header__center">
-        <form action="" method="GET" class="search-form">
-            <input type="text" name="keyword" class="search-input" placeholder="何をお探しですか？">
+        <form action="/" method="GET" class="search-form">
+            <input type="text" name="keyword" class="search-input" placeholder="何をお探しですか？"  value="{{ request('keyword') }}">
         </form>
     </div>
 
@@ -31,7 +31,7 @@
             <button type="submit" class="header-link logout-btn">ログアウト</button>
         </form>
 
-        <a href="" class="header-link-last">出品</a>
+        <a href="{{ route('sell') }}" class="header-link-last">出品</a>
     </div>
 </header>
 

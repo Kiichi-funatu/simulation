@@ -12,7 +12,18 @@ class ProfileController extends Controller
     public function index()
     {
         $user = Auth::user();
-        return view('mypage.index', compact('user'));
+
+        // 出品した商品一覧
+        $sellingItems = $user->items()->latest()->get();
+
+        // 購入した商品一覧
+        $purchasedItems = $user->purchases()
+            ->with('item')
+            ->latest()
+            ->get()
+            ->pluck('item');
+
+        return view('mypage.profile_2', compact('user', 'sellingItems', 'purchasedItems'));
     }
 
     // プロフィール編集画面
@@ -52,8 +63,11 @@ class ProfileController extends Controller
     $user->building = $request->building;
 
     $user->save();
-
-    return redirect()->route('mypage')->with('success', 'プロフィールを更新しました');
+    
+    // ★ここを変更★mypage.indexが見つかりませんのエラーがでたので
+    return redirect('/')->with('success', 'プロフィールを更新しました');
+    
+    //return redirect()->route('mypage')->with('success', 'プロフィールを更新しました');
 }
 
 }

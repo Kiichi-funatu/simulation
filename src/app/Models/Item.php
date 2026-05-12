@@ -56,4 +56,9 @@ class Item extends Model
         {
             return $this->favorites->where('user_id', $user->id)->count() > 0;
         }
+
+        public function purchases()
+        {
+            return $this->hasMany(Purchase::class);
+        }
 }
