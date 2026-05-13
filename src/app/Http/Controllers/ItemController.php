@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Item;
+use App\Models\ItemImage;
 use App\Models\Favorite;   
 use Illuminate\Support\Facades\Auth; 
 use App\Http\Requests\ExhibitionRequest;
@@ -81,19 +82,24 @@ class ItemController extends Controller
     {
         $validated = $request->validated();
 
-        // 画像保存
-        $imagePath = $request->file('image')->store('items', 'public');
-
-        // 商品登録
-        Item::create([
+        // 1. 商品を先に作成
+        $item = Item::create([
             'user_id'     => auth()->id(),
-            'image_path'  => '/storage/' . $imagePath,
-            'category'    => $validated['category'],
-            'condition'   => $validated['condition'],
+            'category_id' => $validated['category_id'],
+            'condition_id'=> $validated['condition_id'],
             'name'        => $validated['name'],
             'brand'       => $request->brand,
+            'color'       => $request->color,
             'description' => $validated['description'],
             'price'       => $validated['price'],
+        ]);
+
+        // 2. 画像を保存して item_images に登録
+        $imagePath = $request->file('image')->store('items', 'public');
+
+        ItemImage::create([
+            'item_id'    => $item->id,
+            'image_path' => '/storage/' . $imagePath,
         ]);
 
         return redirect()->route('mypage')->with('success', '商品を出品しました！');

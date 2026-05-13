@@ -24,29 +24,40 @@ class ExhibitionRequest extends FormRequest
     public function rules()
     {
         return [
-            'name'        => 'required|string|max:255',     // 商品名：入力必須
-            'description' => 'required|string|max:255',     // 商品説明：入力必須、最大255文字
-            'image'       => 'required|image|mimes:jpeg,png|max:2048', // 商品画像：必須、jpeg/png
-            'category'    => 'required|string',             // カテゴリー：選択必須
-            'condition'   => 'required|string',             // 商品の状態：選択必須
-            'price'       => 'required|integer|min:0',      // 価格：必須、数値、0円以上
+            'image'        => 'required|image|mimes:jpeg,png|max:2048',
+            'category_id'  => 'required|integer|exists:categories,id',
+            'condition_id' => 'required|integer|exists:conditions,id',
+            'name'         => 'required|string|max:255',
+            'brand'        => 'nullable|string|max:255',
+            'description'  => 'required|string|max:255',
+            'price'        => 'required|integer|min:0',
         ];
     }
 
     public function messages()
     {
         return [
-            'name.required'        => '商品名は入力必須です。',
-            'description.required' => '商品説明は入力必須です。',
-            'description.max'      => '商品説明は255文字以内で入力してください。',
             'image.required'       => '商品画像は必須です。',
-            'image.image'          => '画像ファイルを選択してください。',
-            'image.mimes'          => '画像はjpegまたはpng形式のみアップロードできます。',
-            'category.required'    => 'カテゴリーを選択してください。',
-            'condition.required'   => '商品の状態を選択してください。',
-            'price.required'       => '価格は入力必須です。',
-            'price.integer'        => '価格は数値で入力してください。',
-            'price.min'            => '価格は0円以上で入力してください。',
+        'image.image'          => '画像ファイルを選択してください。',
+        'image.mimes'          => '画像はjpegまたはpng形式のみアップロードできます。',
+
+        'category_id.required' => 'カテゴリーを選択してください。',
+        'category_id.integer'  => 'カテゴリーIDが不正です。',
+        'category_id.exists'   => '選択したカテゴリーは存在しません。',
+
+        'condition_id.required' => '商品の状態を選択してください。',
+        'condition_id.integer'  => '状態IDが不正です。',
+        'condition_id.exists'   => '選択した状態は存在しません。',
+
+        'name.required'        => '商品名は入力必須です。',
+        'name.max'             => '商品名は255文字以内で入力してください。',
+
+        'description.required' => '商品説明は入力必須です。',
+        'description.max'      => '商品説明は255文字以内で入力してください。',
+
+        'price.required'       => '価格は入力必須です。',
+        'price.integer'        => '価格は数値で入力してください。',
+        'price.min'            => '価格は0円以上で入力してください。',
         ];
     }
 }

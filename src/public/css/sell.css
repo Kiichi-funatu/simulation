@@ -92,7 +92,7 @@
     border-color: #ff4d4d;
 }
 
-/* セレクトボックス */
+ /* セレクトボックス */ 
 .form-select {
     width: 100%;
     padding: 10px;
@@ -100,7 +100,7 @@
     border-radius: 6px;
     font-size: 14px;
     background: #fff;
-}
+} 
 
 /* ③ 商品名・説明 */
 .form-input,
@@ -171,3 +171,4 @@
     font-size: 13px;
     margin-top: 5px;
 }
+

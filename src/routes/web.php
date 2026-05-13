@@ -7,6 +7,8 @@ use App\Http\Controllers\ItemController;
 use App\Http\Controllers\PurchaseController;
 use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\CommentController;
+use App\Models\Category;
+use App\Models\Condition;
 
 /*
 |--------------------------------------------------------------------------
@@ -52,6 +54,8 @@ Route::middleware('auth')->group(function () {
     Route::post('/sell', [ItemController::class, 'store'])->name('sell.store');
 
     Route::get('/sell', function() {
-        return view('sell'); // <- 出品画面のblade
+        $categories = Category::all();
+        $conditions = Condition::all();
+        return view('sell', compact('categories', 'conditions')); // <- 出品画面のblade
     })->name('sell');
 });

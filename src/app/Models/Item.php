@@ -11,10 +11,14 @@ class Item extends Model
 
     //　保存可能なカラム
     protected $fillable = [
-        'name',
-        'price',
-        'description',
         'user_id',
+        'image_path',
+        'category_id',
+        'condition_id',
+        'name',
+        'brand',
+        'description',
+        'price',
     ];
 
     // 商品画像（1対1）

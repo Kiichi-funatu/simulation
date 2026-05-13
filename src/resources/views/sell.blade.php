@@ -40,21 +40,17 @@
             <div class="form-group">
                 <label class="form-label">カテゴリー</label>
 
-                <div class="category-tags">
-                    @foreach ([
-                        'ファッション','家電','インテリア','レディース','メンズ','コスメ',
-                        '本','ゲーム','スポーツ','キッチン','ハンドメイド','アクセサリー',
-                        'おもちゃ','ベビー・キッズ'
-                    ] as $category)
-                        <span class="category-tag" data-value="{{ $category }}">
-                            {{ $category }}
+                 <div class="category-tags">
+                    @foreach ($categories as $category)
+                        <span class="category-tag" data-value="{{ $category->id }}">
+                            {{ $category->name }}
                         </span>
                     @endforeach
                 </div>
 
-                <input type="hidden" name="category" id="categoryInput">
+                <input type="hidden" name="category_id" id="categoryInput">
 
-                @error('category')
+                @error('category_id')
                     <div class="error-message">{{ $message }}</div>
                 @enderror
             </div>
@@ -62,15 +58,17 @@
             {{-- 商品の状態 --}}
             <div class="form-group">
                 <label class="form-label">商品の状態</label>
-                <select name="condition" class="form-select">
+
+                <select name="condition_id" class="form-select">
                     <option value="">選択してください</option>
-                    <option value="良好">良好</option>
-                    <option value="目立った汚れなし">目立った汚れなし</option>
-                    <option value="やや傷や汚れあり">やや傷や汚れあり</option>
-                    <option value="状態が悪い">状態が悪い</option>
+                    @foreach ($conditions as $condition)
+                        <option value="{{ $condition->id }}" {{ old('condition_id') == $condition->id ? 'selected' : '' }}>
+                            {{ $condition->name }}
+                        </option>
+                    @endforeach
                 </select>
-                
-                @error('condition')
+
+                @error('condition_id')
                     <div class="error-message">{{ $message }}</div>
                 @enderror
             </div>
@@ -165,5 +163,7 @@ document.querySelectorAll('.category-tag').forEach(tag => {
     });
 });
 </script>
+
+
 
 @endsection
