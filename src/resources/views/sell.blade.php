@@ -48,7 +48,8 @@
                     @endforeach
                 </div>
 
-                <input type="hidden" name="category_id" id="categoryInput">
+                <input type="hidden" name="category_ids" id="categoryInput"> 
+                
 
                 @error('category_id')
                     <div class="error-message">{{ $message }}</div>
@@ -157,9 +158,16 @@ document.getElementById("imageInput").addEventListener("change", function (e) {
 <script>
 document.querySelectorAll('.category-tag').forEach(tag => {
     tag.addEventListener('click', () => {
-        document.querySelectorAll('.category-tag').forEach(t => t.classList.remove('active'));
-        tag.classList.add('active');
-        document.getElementById('categoryInput').value = tag.dataset.value;
+
+        // active の ON/OFF を切り替える
+        tag.classList.toggle('active');
+
+        // active のタグだけ集める
+        const selected = [...document.querySelectorAll('.category-tag.active')]
+            .map(t => t.dataset.value);
+
+        // hidden input にカンマ区切りで入れる
+        document.getElementById('categoryInput').value = selected.join(',');
     });
 });
 </script>

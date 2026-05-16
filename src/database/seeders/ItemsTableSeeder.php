@@ -109,10 +109,9 @@ class ItemsTableSeeder extends Seeder
 
         foreach ($items as $data) {
 
-            // ① items に商品を作成
+            // ① items に商品を作成（category_id は使わない）
             $item = Item::create([
                 'user_id' => 1,
-                'category_id' => 1,
                 'name' => $data['name'],
                 'price' => $data['price'],
                 'brand' => $data['brand'],
@@ -120,7 +119,11 @@ class ItemsTableSeeder extends Seeder
                 'condition_id' => $conditionMap[$data['condition']],
             ]);
 
-            // ② item_images に画像を作成
+            // ② カテゴリを紐づける（仮でカテゴリID 1 をつける）
+            // 必要なら複数にしてもOK → [1, 2] など
+            $item->categories()->sync([1]);
+
+            // ③ item_images に画像を作成
             ItemImage::create([
                 'item_id' => $item->id,
                 'image_path' => $data['image_path'],

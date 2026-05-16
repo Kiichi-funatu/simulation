@@ -13,7 +13,7 @@
     <div class="tabs">
         <a href="/?tab=items{{ request('keyword') ? '&keyword='.request('keyword') : '' }}"
            class="tab-link {{ $tab === 'items' ? 'active' : '' }}">
-            商品一覧
+            おすすめ
         </a>
 
         <a href="/?tab=mylist{{ request('keyword') ? '&keyword='.request('keyword') : '' }}"
@@ -23,7 +23,7 @@
     </div>
 
     <h2 class="page-title">
-        {{ $tab === 'items' ? '商品一覧' : 'マイリスト' }}
+        {{ $tab === 'items' ? 'おすすめ' : 'マイリスト' }}
     </h2>
 
     {{-- 検索キーワード --}}

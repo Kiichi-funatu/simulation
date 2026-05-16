@@ -25,7 +25,7 @@ class ExhibitionRequest extends FormRequest
     {
         return [
             'image'        => 'required|image|mimes:jpeg,png|max:2048',
-            'category_id'  => 'required|integer|exists:categories,id',
+            'category_ids'  => 'required|string',
             'condition_id' => 'required|integer|exists:conditions,id',
             'name'         => 'required|string|max:255',
             'brand'        => 'nullable|string|max:255',
@@ -41,9 +41,8 @@ class ExhibitionRequest extends FormRequest
         'image.image'          => '画像ファイルを選択してください。',
         'image.mimes'          => '画像はjpegまたはpng形式のみアップロードできます。',
 
-        'category_id.required' => 'カテゴリーを選択してください。',
-        'category_id.integer'  => 'カテゴリーIDが不正です。',
-        'category_id.exists'   => '選択したカテゴリーは存在しません。',
+        'category_ids.required' => 'カテゴリーを選択してください。',
+        
 
         'condition_id.required' => '商品の状態を選択してください。',
         'condition_id.integer'  => '状態IDが不正です。',

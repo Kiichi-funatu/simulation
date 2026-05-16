@@ -20,10 +20,19 @@
 }
 
 .item-image-area {
-    width: 100%;
+ /* width: 100%;
     aspect-ratio: 1 / 1;
     overflow: hidden;
+    border-radius: 8px; */
+
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    background: #f0f0f0;
     border-radius: 8px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .item-image {
@@ -35,4 +44,30 @@
 .item-name {
     margin-top: 8px;
     font-size: 14px;
+}
+
+/* タブ */
+.tabs {
+    display: flex;
+    gap: 30px;
+    margin-bottom: 20px;
+}
+
+.tab-link {
+    text-decoration: none;
+    color: #666;
+    font-size: 18px;
+    padding-bottom: 6px;
+    border-bottom: 2px solid transparent;
+}
+
+.tab-link.active {
+    color: #ff5555;
+    border-bottom: 2px solid #ff5555;
+}
+
+/* タイトル */
+.page-title {
+    font-size: 22px;
+    margin-bottom: 20px;
 }

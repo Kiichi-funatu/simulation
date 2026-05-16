@@ -81,7 +81,11 @@
 
                 <div class="info-row">
                     <span class="info-label">カテゴリー</span>
-                    <span class="info-value">{{ $item->category->name }}</span>
+                    <span class="info-value">
+                        @foreach($item->categories as $category)
+                            <span class="category-tag">{{ $category->name }}</span>
+                        @endforeach
+                    </span>
                 </div>
 
                 <div class="info-row">

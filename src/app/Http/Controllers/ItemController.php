@@ -18,7 +18,7 @@ class ItemController extends Controller
         // 商品一覧タブ
         if ($tab === 'items') {
 
-            $query = Item::with(['images', 'condition', 'category']);
+            $query = Item::with(['images', 'condition', 'categories']);
 
             if ($request->filled('keyword')) {
                 $keyword = $request->keyword;
@@ -65,7 +65,7 @@ class ItemController extends Controller
     {
         $item = Item::with([
             'images',
-            'category',
+            'categories',
             'condition',
             'user',
             'favorites',
@@ -85,7 +85,6 @@ class ItemController extends Controller
         // 1. 商品を先に作成
         $item = Item::create([
             'user_id'     => auth()->id(),
-            'category_id' => $validated['category_id'],
             'condition_id'=> $validated['condition_id'],
             'name'        => $validated['name'],
             'brand'       => $request->brand,
@@ -93,8 +92,14 @@ class ItemController extends Controller
             'description' => $validated['description'],
             'price'       => $validated['price'],
         ]);
+        
+        // 2. カテゴリを紐づける（複数）
+        if ($request->filled('category_ids')) {
+            $categoryIds = explode(',', $request->category_ids);
+            $item->categories()->sync($categoryIds);
+        }
 
-        // 2. 画像を保存して item_images に登録
+        // 3. 画像を保存して item_images に登録
         $imagePath = $request->file('image')->store('items', 'public');
 
         ItemImage::create([

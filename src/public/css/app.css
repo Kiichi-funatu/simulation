@@ -1,11 +1,12 @@
+/* PC 基本レイアウト */
 .header {
-     width: 100%;
-     height: 82px;
-     background-color: black;
-     display: flex;
-     align-items: center;
-     justify-content: flex-start;
-     padding-left: 20px;
+    width: 100%;
+    height: 82px;
+    background-color: black;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 0 20px;
 }
 
 .header__left {
@@ -26,6 +27,7 @@
     align-items: center;
 }
 
+/* 検索バー */
 .search-input {
     width: 100%;
     max-width: 300px;
@@ -34,6 +36,7 @@
     border-radius: 4px;
 }
 
+/* リンク */
 .header-link,
 .logout-btn {
     background: none;
@@ -57,7 +60,35 @@
     margin-right: 30px;
 }
 
-.logout-btn:hover,
-.header-link:hover {
-    opacity: 0.7;
+/* -------------------------
+   スマホ対応（768px以下）
+-------------------------- */
+@media (max-width: 768px) {
+
+    .header {
+        flex-wrap: wrap; /* ← これが超重要！ */
+        height: auto;
+        padding: 10px;
+    }
+
+    .header__left,
+    .header__center,
+    .header__right {
+        flex: 1 1 100%; /* 全部縦並びにする */
+        justify-content: center;
+        margin-bottom: 10px;
+    }
+
+    .header__right {
+        justify-content: center;
+        gap: 16px;
+    }
+
+    .search-input {
+        max-width: 100%; /* スマホでは全幅 */
+    }
+
+    .header-link-last {
+        margin-right: 0;
+    }
 }
