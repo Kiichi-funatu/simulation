@@ -29,13 +29,41 @@ Route::get('/register', function () {
 Route::get('/', [ItemController::class, 'index'])->name('items.index');
 Route::get('/items/{id}', [ItemController::class, 'show'])->name('items.show');
 
+// ============================
+//  ログイン必須 + プロフィール登録必須
+//  → 購入に必要な情報が揃っている前提
+// ============================
+
 Route::middleware(['auth', 'profile.complete'])->group(function () {
-    Route::get('/purchase/{id}', [PurchaseController::class, 'index'])->name('purchase.index');
+    // ============================
+    //  FN021〜FN024 購入系ルート
+    // ============================
+
+    // 購入画面表示（FN021）
+    Route::get('/purchase/{item_id}', [PurchaseController::class, 'purchase'])
+        ->name('purchase.index');
+
+    // 支払い方法選択 → Stripe or コンビニ（FN023）
+    Route::post('/purchase/{item_id}/checkout', [PurchaseController::class, 'checkout'])
+        ->name('purchase.checkout');
+
+    // 購入確定（FN022）
+    Route::get('/purchase/{item_id}/buy', [PurchaseController::class, 'buy'])
+        ->name('purchase.buy');
+
+    // 配送先変更（FN024）
+    Route::get('/purchase/address/{item_id}', [ProfileController::class, 'editAddress'])
+        ->name('purchase.address');
+
+    Route::post('/purchase/address/{item_id}', [ProfileController::class, 'updateAddress'])
+        ->name('purchase.address.update');
 });
 
 
 // 🔐 ログイン必須
 Route::middleware('auth')->group(function () {
+    
+
     // プロフィール表示
     Route::get('/mypage', [ProfileController::class, 'index'])->name('mypage');
 
@@ -45,12 +73,21 @@ Route::middleware('auth')->group(function () {
     // プロフィール更新処理
     Route::post('/mypage/profile', [ProfileController::class, 'update'])->name('mypage.update');
 
+    // ============================
+    //  お気に入り
+    // ============================
     Route::post('/favorite/{id}', [FavoriteController::class, 'store'])->name('favorite.store');
 
     Route::delete('/favorite/{id}', [FavoriteController::class, 'destroy'])->name('favorite.destroy');
 
+    // ============================
+    //  コメント
+    // ============================
     Route::post('/items/{id}/comment', [CommentController::class, 'store'])->name('comments.store');
-
+    
+    // ============================
+    //  出品
+    // ============================
     Route::post('/sell', [ItemController::class, 'store'])->name('sell.store');
 
     Route::get('/sell', function() {

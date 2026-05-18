@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\ProfileRequest;
+use App\Models\Item;
+use App\Http\Requests\AddressRequest;
 
 class ProfileController extends Controller
 {
@@ -70,4 +72,31 @@ class ProfileController extends Controller
     //return redirect()->route('mypage')->with('success', 'プロフィールを更新しました');
 }
 
+    public function editAddress($item_id)
+    {
+        $user = Auth::user();
+        $item = Item::findOrFail($item_id);
+
+        return view('purchase.address', compact('user', 'item'));
+    }
+
+    public function updateAddress(AddressRequest $request, $item_id)
+    {
+        $user = Auth::user();
+
+        $request->validate([
+            'postal_code' => 'required',
+            'address'     => 'required',
+            'building'    => 'nullable',
+        ]);
+
+        $user->update([
+            'postal_code' => $request->postal_code,
+            'address'     => $request->address,
+            'building'    => $request->building,
+        ]);
+
+        return redirect()->route('purchase.index', $item_id)
+                        ->with('success', '配送先を更新しました。');
+    }
 }

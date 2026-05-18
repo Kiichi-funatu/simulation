@@ -107,7 +107,7 @@
                         <div class="comment-user">
                             @if($comment->user->profile_image)
                                 {{-- プロフィール画像がある場合 --}}
-                                <img src="{{ $comment->user->profile_image }}" class="user-icon">
+                                <img src="{{ asset('storage/'.$comment->user->profile_image) }}" class="user-icon">
                             @else
                                 {{-- プロフィール画像がない場合：灰色の丸 --}}
                                 <div class="user-icon default-icon"></div>

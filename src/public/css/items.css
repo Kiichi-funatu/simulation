@@ -20,11 +20,7 @@
 }
 
 .item-image-area {
- /* width: 100%;
-    aspect-ratio: 1 / 1;
-    overflow: hidden;
-    border-radius: 8px; */
-
+    position: relative;
     width: 100%;
     aspect-ratio: 1 / 1;
     background: #f0f0f0;
@@ -33,6 +29,19 @@
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+/* Sold バッジ */
+.sold-label {
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    background: #ff4d4d;
+    color: white;
+    padding: 5px 10px;
+    font-size: 14px;
+    border-radius: 4px;
+    z-index: 10;
 }
 
 .item-image {

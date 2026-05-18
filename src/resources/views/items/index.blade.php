@@ -43,6 +43,11 @@
             @foreach($items as $item)
                 <a href="{{ route('items.show', $item->id) }}" class="item-card">
                     <div class="item-image-area">
+                        {{-- ★ Sold 表示（購入済み） --}}
+                        @if($item->purchase)
+                            <span class="sold-label">Sold</span>
+                        @endif
+
                         @if($item->images->isNotEmpty())
                             <img src="{{ $item->images[0]->image_path }}" class="item-image">
                         @else

@@ -26,6 +26,9 @@ class CreateItemsTable extends Migration
            $table->text('description');       // 商品説明（長文）
            $table->integer('price');          // 金額（税込）
 
+           // 商品が売れたかどうか
+            $table->boolean('is_sold')->default(false);
+
            // タイムスタンプ
            $table->timestamps();
 
