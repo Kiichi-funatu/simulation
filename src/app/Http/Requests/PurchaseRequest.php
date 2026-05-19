@@ -25,8 +25,6 @@ class PurchaseRequest extends FormRequest
     {
         return [
             'payment_method' => 'required|in:コンビニ払い,カード支払い',
-            'postal_code'    => 'required',
-            'address'        => 'required',
         ];
     }
 
