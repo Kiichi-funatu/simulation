@@ -8,10 +8,18 @@
     margin-bottom: 20px;
 }
 
+/* 767px 未満 → 2分割 */
 .item-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 16px;
+}
+
+/* 767px 以上 → 3分割 */
+@media (min-width: 767px) {
+    .item-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
 }
 
 .item-card {

@@ -33,21 +33,21 @@
                 {{-- いいね（ログイン時のみ操作可能） --}}
                 @auth
                     @if($item->isFavoritedBy(Auth::user()))
-                        {{-- いいね解除 --}}
+                        {{-- いいね追加 --}}
                         <form action="{{ route('favorite.destroy', $item->id) }}" method="POST" class="favorite-form">
                             @csrf
                             @method('DELETE')
                             <button class="favorite-button liked">
-                                <img src="{{ asset('images/ハートロゴ_デフォルト.png') }}" class="icon liked-icon">
+                                <img src="{{ asset('images/ハートロゴ_ピンク.png') }}" class="icon liked-icon">
                                 {{ $favoriteCount }}
                             </button>
                         </form>
                     @else
-                        {{-- いいね追加 --}}
+                        {{-- いいね解除 --}}
                         <form action="{{ route('favorite.store', $item->id) }}" method="POST" class="favorite-form">
                             @csrf
                             <button class="favorite-button">
-                                <img src="{{ asset('images/ハートロゴ_ピンク.png') }}" class="icon">
+                                <img src="{{ asset('images/ハートロゴ_デフォルト.png') }}" class="icon">
                                 {{ $favoriteCount }}
                             </button>
                         </form>

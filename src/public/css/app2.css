@@ -13,53 +13,7 @@
     flex: 1;
 }
 
-.header__center {
-    flex: 2;
-    display: flex;
-    justify-content: center;
-}
 
-.header__right {
-    flex: 1;
-    display: flex;
-    justify-content: flex-end;
-    gap: 24px;
-    align-items: center;
-}
-
-/* 検索バー */
-.search-input {
-    width: 100%;
-    max-width: 300px;
-    padding: 8px 12px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    background-color: #fff;
-}
-
-/* リンク */
-.header-link,
-.logout-btn {
-    background: none;
-    border: none;
-    font-size: 16px;
-    cursor: pointer;
-    text-decoration: none;
-    color: #fff;
-    white-space: nowrap;
-}
-
-.header-link-last {
-    background-color: #fff;
-    font-size: 16px;
-    cursor: pointer;
-    text-decoration: none;
-    color: #000;
-    border-radius: 1px;
-    padding: 5px 10px;
-    white-space: nowrap;
-    margin-right: 30px;
-}
 
 /* -------------------------
    スマホ対応（768px以下）

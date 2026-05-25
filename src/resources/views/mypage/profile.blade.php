@@ -5,12 +5,12 @@
 @endsection
 
 @section('content')
-<main class="register-main">
-    <div class="profile-edit-container">
 
-    <h2 class="title">プロフィール設定</h2>
+<div class="profile-container">
 
-    <form action="{{ route('mypage.update') }}" method="POST" enctype="multipart/form-data" class="register-form">
+    <h1 class="profile-title">プロフィール設定</h1>
+
+    <form action="{{ route('mypage.update') }}" method="POST" enctype="multipart/form-data" class="profile-form">
         @csrf
 
         {{-- プロフィール画像 --}}
@@ -28,46 +28,44 @@
                 <div class="error-message">{{ $message }}</div>
             @enderror
         </div>
-        
 
-            <div class="form-group">
-                <label class="form-label">ユーザー名</label>
-                <input type="text" name="name" class="form-input" value="{{ old('name', $user->name) }}">
-                @error('name')
-                    <div class="error-message">{{ $message }}</div>
-                @enderror
-            </div>
-            <div class="form-group">
-                <label class="form-label">郵便番号</label>
-                <input type="text" name="postal_code" class="form-input" value="{{ old('postal_code', $user->postal_code) }}">
-                @error('postal_code')
-                    <div class="error-message">{{ $message }}</div>
-                @enderror
-            </div>
-            <div class="form-group">
-                <label class="form-label">住所</label>
-                <input type="text" name="address" class="form-input" value="{{ old('address', $user->address) }}">
-                @error('address')
-                    <div class="error-message">{{ $message }}</div>
-                @enderror
-            </div>
-            <div class="form-group">
-                <label class="form-label">建物名</label>
-                <input type="text" name="building" class="form-input" value="{{ old('building', $user->building) }}">
-                @error('building')
-                    <div class="error-message">{{ $message }}</div>
-                @enderror
-            </div>
+        <div class="form-group">
+            <label class="form-label">ユーザー名</label>
+            <input type="text" name="name" class="form-input" value="{{ old('name', $user->name) }}">
+            @error('name')
+                <div class="error-message">{{ $message }}</div>
+            @enderror
+        </div>
 
-            <div class="form-button-area">
-                <button type="submit" class="submit-button">更新する</button>
-            </div>
+        <div class="form-group">
+            <label class="form-label">郵便番号</label>
+            <input type="text" name="postal_code" class="form-input" value="{{ old('postal_code', $user->postal_code) }}">
+            @error('postal_code')
+                <div class="error-message">{{ $message }}</div>
+            @enderror
+        </div>
+
+        <div class="form-group">
+            <label class="form-label">住所</label>
+            <input type="text" name="address" class="form-input" value="{{ old('address', $user->address) }}">
+            @error('address')
+                <div class="error-message">{{ $message }}</div>
+            @enderror
+        </div>
+
+        <div class="form-group">
+            <label class="form-label">建物名</label>
+            <input type="text" name="building" class="form-input" value="{{ old('building', $user->building) }}">
+            @error('building')
+                <div class="error-message">{{ $message }}</div>
+            @enderror
+        </div>
+
+        <button type="submit" class="submit-button">更新する</button>
 
     </form>
 
 </div>
-
-</main>
 
 <script>
 document.getElementById("imageInput").addEventListener("change", function (e) {
@@ -85,6 +83,5 @@ document.getElementById("imageInput").addEventListener("change", function (e) {
     }
 });
 </script>
-
 
 @endsection

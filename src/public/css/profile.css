@@ -1,19 +1,31 @@
-.profile-edit-container {
-    width: 680px;
+/* ===== プロフィール画面レイアウト ===== */
+
+.profile-container {
+    width: 400px;
     margin: 40px auto;
+}
+
+/* タイトル */
+.profile-title {
+    font-size: 28px;
+    font-weight: bold;
+    margin-bottom: 30px;
     text-align: center;
 }
 
-.title {
-    font-size: 22px;
-    margin-bottom: 20px;
+/* フォーム */
+.profile-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
 }
 
+/* 画像エリア */
 .image-area {
-    margin-bottom: 20px;
-    text-align: left;
     display: flex;
     align-items: center;
+    gap: 20px;
+    margin-bottom: 20px;
 }
 
 .profile-image {
@@ -21,56 +33,55 @@
     height: 120px;
     border-radius: 50%;
     object-fit: cover;
-    margin-bottom: 10px;
-    background-color: lightgray
+    background-color: #ddd;
 }
 
 .image-select-btn {
-    display: inline-block;
-    padding: 8px 16px;
+    padding: 10px 16px;
     background: #fff;
-    color: #FF5555;
+    color: #ff5555;
+    border: 1px solid #ff5555;
     border-radius: 6px;
     cursor: pointer;
-    border: solid #FF5555;
-    margin-left: 50px;
-}
-
-.form-group {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    margin-bottom: 16px;
-}
-
-.form-label {
-    margin-bottom: 6px;
-    font-weight: bold;
-}
-
-.form-input {
-    margin-bottom: 6px;
-    font-weight: bold;
-    width: 100%;
-    height: 65.25px;
-    border-radius: 5px;
-    border: 1px solid;
-}
-
-.error-message {
-    color: red;
     font-size: 14px;
 }
 
-.submit-button {
-    margin-bottom: 6px;
+/* ラベル */
+.form-label {
+    font-size: 14px;
     font-weight: bold;
-    width: 100%;
-    height: 65.25px;
-    border-radius: 5px;
-    background-color: #FF5555;
-    color: white;
-    border: none;
-    font-size: 20px;
+    margin-bottom: 5px;
 }
 
+/* 入力欄 */
+.form-input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 14px;
+}
+
+/* エラー */
+.error-message {
+    color: red;
+    font-size: 12px;
+    margin-top: 4px;
+}
+
+/* 更新ボタン */
+.submit-button {
+    width: 100%;
+    padding: 14px;
+    background-color: #ff5555;
+    color: #fff;
+    font-size: 16px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.submit-button:hover {
+    opacity: 0.9;
+}

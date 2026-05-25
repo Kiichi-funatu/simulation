@@ -1,48 +1,43 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{{ asset('css/login.css') }}">
-    <title>coachtech</title>
-</head>
-<body>
-    <header class="header">
-        <img src="{{ asset('images/COACHTECHヘッダーロゴ.png') }}" alt="" class="header-logo">
-    </header>
+@extends('layouts.app2')
 
-    <main class="register-main">
+@section('title', 'ログイン')
 
-        <h1 class="register-title">ログイン</h1>
+@section('css')
+<link rel="stylesheet" href="{{ asset('css/login.css') }}">
+@endsection
 
-        <form action="{{ route('login') }}" method="post" class="register-form">
-            @csrf
+@section('content')
 
-            <div class="form-group">
-                <label class="form-label">メールアドレス</label>
-                <input type="email" name="email" class="form-input" value="{{ old('email') }}" autofocus>
-                @error('email')
-                    <div class="error-message">{{ $message }}</div>
-                @enderror
-            </div>
+<div class="login-container">
 
-            <div class="form-group">
-                <label class="form-label">パスワード</label>
-                <input type="password" name="password" class="form-input">
-                @error('password')
-                    <div class="error-message">{{ $message }}</div>
-                @enderror
-            </div>
+    <h1 class="login-title">ログイン</h1>
 
-            <div class="form-button-area">
-                <button type="submit" class="submit-button">ログインする</button>
-            </div>
-        </form>
+    <form action="{{ route('login') }}" method="post" class="login-form">
+        @csrf
 
-        <div class="login-link-area">
-            <a href="/register" class="login-link">会員登録はこちら</a>
+        <div class="form-group">
+            <label class="form-label">メールアドレス</label>
+            <input type="email" name="email" class="form-input" value="{{ old('email') }}" autofocus>
+            @error('email')
+                <div class="error-message">{{ $message }}</div>
+            @enderror
         </div>
 
-    </main>
-</body>
-</html>
+        <div class="form-group">
+            <label class="form-label">パスワード</label>
+            <input type="password" name="password" class="form-input">
+            @error('password')
+                <div class="error-message">{{ $message }}</div>
+            @enderror
+        </div>
+
+        <button type="submit" class="submit-button">ログインする</button>
+    </form>
+
+    <div class="register-link-area">
+        <a href="/register" class="register-link">会員登録はこちら</a>
+    </div>
+
+</div>
+
+@endsection
