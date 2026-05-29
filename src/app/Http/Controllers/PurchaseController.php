@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Item;
 use App\Models\Purchase;
 use App\Http\Requests\PurchaseRequest;
+use Stripe\Stripe;
+use Stripe\Checkout\Session as StripeSession;
 
 class PurchaseController extends Controller
 {
@@ -32,7 +34,7 @@ class PurchaseController extends Controller
     /**
      * 支払い方法選択 → checkout（FN023）
      */
-    public function checkout(PurchaseRequest $request, $id)
+    /* public function checkout(PurchaseRequest $request, $id)
     {
         $item = Item::findOrFail($id);
 
@@ -47,7 +49,62 @@ class PurchaseController extends Controller
 
         // buy へリダイレクト（GET）
         return redirect()->route('purchase.buy', $item->id);
+    } */
+
+    
+
+    public function checkout(PurchaseRequest $request, $id)
+    {
+        // バリデーション
+        $validated = $request->validate([
+            'payment_method' => 'required|in:コンビニ払い,カード支払い',
+        ]);
+
+        $paymentMethod = $validated['payment_method'];
+
+        // 商品取得
+        $item = Item::findOrFail($id);
+
+        // ① コンビニ払い → 通常の購入処理へ
+        if ($paymentMethod === 'コンビニ払い') {
+            session(['payment_method' => $paymentMethod]);
+            return redirect()->route('purchase.buy', $item->id);
+        }
+
+        // ② カード支払い → Stripe Checkout へ
+        if ($paymentMethod === 'カード支払い') {
+
+            session(['payment_method' => $paymentMethod]);
+        
+            Stripe::setApiKey(env('STRIPE_SECRET'));
+
+            $session = StripeSession::create([
+                'payment_method_types' => ['card'],
+
+                'line_items' => [[
+                    'price_data' => [
+                        'currency' => 'jpy',
+                        'product_data' => [
+                            'name' => $item->name,
+                        ],
+                        'unit_amount' => $item->price,
+                    ],
+                    'quantity' => 1,
+                ]],
+
+                'mode' => 'payment',
+
+                // 決済成功時
+                'success_url' => route('purchase.buy', $item->id) . '?session_id={CHECKOUT_SESSION_ID}',
+
+                // キャンセル時
+                'cancel_url' => route('purchase.index', $item->id),
+            ]);
+
+            return redirect($session->url);
+        }
     }
+
 
     /**
      * 購入確定（FN022）

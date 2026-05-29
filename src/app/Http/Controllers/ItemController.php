@@ -18,7 +18,7 @@ class ItemController extends Controller
         // 商品一覧タブ
         if ($tab === 'items') {
 
-            $query = Item::with(['images', 'condition', 'categories']);
+            $query = Item::with(['images', 'condition', 'categories'])->where('user_id', '!=', Auth::id()); // ← 自分の商品を除外
 
             if ($request->filled('keyword')) {
                 $keyword = $request->keyword;
