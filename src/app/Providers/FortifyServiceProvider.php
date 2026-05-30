@@ -8,11 +8,13 @@ use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Http\Request;
 use App\Actions\Fortify\CreateNewUser;
-// ★ 追加
 use App\Http\Requests\LoginRequest;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
+
+use Laravel\Fortify\Contracts\EmailVerificationResponse;
+use App\Actions\Fortify\EmailVerificationResponse as CustomEmailVerificationResponse;
 
 
 class FortifyServiceProvider extends ServiceProvider
@@ -24,7 +26,7 @@ class FortifyServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+         $this->app->singleton(EmailVerificationResponse::class, CustomEmailVerificationResponse::class);
     }
 
     /**
@@ -44,8 +46,13 @@ class FortifyServiceProvider extends ServiceProvider
             return view('auth.login');
         });
 
+        Fortify::verifyEmailView(function () {
+            return view('auth.verify-email'); // ← メール認証誘導画面
+        });
+
+
         // ★ LoginRequest を使ったログインバリデーション
-        Fortify::authenticateUsing(function ($request) {
+        /* Fortify::authenticateUsing(function ($request) {
 
             Validator::make($request->all(), (new LoginRequest)->rules())->validate();
 
@@ -56,7 +63,7 @@ class FortifyServiceProvider extends ServiceProvider
             }
 
             return null;
-        });
+        }); */
 
         RateLimiter::for('login', function (Request $request) {
             $email = (string) $request->email;

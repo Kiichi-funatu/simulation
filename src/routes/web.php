@@ -10,6 +10,9 @@ use App\Http\Controllers\CommentController;
 use App\Models\Category;
 use App\Models\Condition;
 
+use App\Http\Requests\LoginRequest;
+use Illuminate\Support\Facades\Auth;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -25,6 +28,11 @@ Route::post('/register', [RegisterController::class, 'store']);
 Route::get('/register', function () {
     return view('auth.register');
 });
+
+//メール認証画面
+Route::get('/email/verify/notice', function () {
+    return view('auth.verify-email');
+})->name('verification.notice.custom');
 
 Route::get('/', [ItemController::class, 'index'])->name('items.index');
 Route::get('/items/{id}', [ItemController::class, 'show'])->name('items.show');
@@ -67,11 +75,20 @@ Route::middleware('auth')->group(function () {
     // プロフィール表示
     Route::get('/mypage', [ProfileController::class, 'index'])->name('mypage');
 
-    // プロフィール編集画面
-    Route::get('/mypage/profile', [ProfileController::class, 'edit'])->name('mypage.edit');
+    
+    // ★ メール認証必須にする
+    Route::middleware('verified.custom')->group(function () {
 
-    // プロフィール更新処理
-    Route::post('/mypage/profile', [ProfileController::class, 'update'])->name('mypage.update');
+        // プロフィール編集画面
+        Route::get('/mypage/profile', [ProfileController::class, 'edit'])->name('mypage.edit');
+
+        // プロフィール更新処理
+        Route::post('/mypage/profile', [ProfileController::class, 'update'])->name('mypage.update');
+
+    });
+    
+    
+    
 
     // ============================
     //  お気に入り
@@ -96,3 +113,19 @@ Route::middleware('auth')->group(function () {
         return view('sell', compact('categories', 'conditions')); // <- 出品画面のblade
     })->name('sell');
 });
+
+
+Route::post('/login', function (LoginRequest $request) {
+
+    // LoginRequest が自動でバリデーション実行
+    $credentials = $request->only('email', 'password');
+
+    if (Auth::attempt($credentials)) {
+        $request->session()->regenerate();
+        return redirect()->intended('/');
+    }
+
+    return back()->withErrors([
+        'email' => 'メールアドレスまたはパスワードが違います。',
+    ]);
+})->name('login');

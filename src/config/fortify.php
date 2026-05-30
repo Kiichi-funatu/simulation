@@ -147,7 +147,7 @@ return [
     'features' => [
         //Features::registration(), 4/26Fortify の登録機能を無効化
         Features::resetPasswords(),
-        // Features::emailVerification(),
+        Features::emailVerification(),
         Features::updateProfileInformation(),
         Features::updatePasswords(),
         Features::twoFactorAuthentication([

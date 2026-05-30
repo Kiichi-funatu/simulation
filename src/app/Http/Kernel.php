@@ -64,5 +64,7 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'profile.complete' => \App\Http\Middleware\EnsureProfileIsComplete::class,
+        // ★ ここに追加（メール認証用ミドルウェア）
+        'verified.custom' => \App\Http\Middleware\EnsureEmailIsVerifiedCustom::class,
     ];
 }

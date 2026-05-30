@@ -1,0 +1,59 @@
+/* 全体の余白と中央寄せ */
+.verify-wrapper {
+    max-width: 480px;
+    margin: 200px auto;
+    text-align: center;
+}
+
+/* ロゴは左上に配置（白背景に直置き） */
+.logo-area {
+    text-align: left;
+    margin-bottom: 60px;
+}
+
+.logo-image {
+    height: 28px;
+}
+
+/* verify-box は存在しないので削除 → 中央寄せだけ */
+.verify-content {
+    text-align: center;
+}
+
+/* メッセージ */
+.verify-message {
+    margin-bottom: 32px;
+    line-height: 1.8;
+    font-size: 15px;
+    color: #333;
+    font-weight: bold;
+}
+
+/* グレーのボタン（画像と同じ） */
+.verify-button {
+    display: inline-block;
+    background: #e5e5e5;
+    color: #333;
+    padding: 12px 30px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 14px;
+    margin-bottom: 20px;
+    font-weight: bold;
+    border: 1px solid #333;
+}
+
+/* 再送リンク（青文字） */
+.resend-form {
+    margin-top: 8px;
+}
+
+.resend-link {
+    background: none;
+    border: none;
+    color: #007bff;
+    text-decoration: underline;
+    cursor: pointer;
+    font-size: 14px;
+    text-decoration: none;
+}

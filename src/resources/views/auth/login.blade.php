@@ -17,7 +17,7 @@
 
         <div class="form-group">
             <label class="form-label">メールアドレス</label>
-            <input type="email" name="email" class="form-input" value="{{ old('email') }}" autofocus>
+            <input type="text" name="email" class="form-input" value="{{ old('email') }}" autofocus>
             @error('email')
                 <div class="error-message">{{ $message }}</div>
             @enderror
