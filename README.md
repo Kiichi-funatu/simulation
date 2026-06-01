@@ -55,7 +55,7 @@ php artisan storage:link
 ---
 
 ## ER図
-C:\Users\kiich\Downloads\mermaid-diagram-2026-05-19-212601.png
+![alt text](mermaid-diagram-2026-05-19-212601.png)
 
 ---
 
