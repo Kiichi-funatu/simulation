@@ -32,6 +32,24 @@ DB_DATABASE=laravel_db
 DB_USERNAME=laravel_user
 DB_PASSWORD=laravel_pass
 
+### メール設定（Mailhog 使用）
+
+MAIL_MAILER=smtp
+MAIL_HOST=mailhog
+MAIL_PORT=1025
+MAIL_USERNAME=null
+MAIL_PASSWORD=null
+MAIL_ENCRYPTION=null
+
+MAIL_FROM_ADDRESS=example@example.com
+MAIL_FROM_NAME="Simulation App"
+
+### Stripe 設定（決済機能を使用する場合）
+
+STRIPE_SECRET=
+STRIPE_KEY=
+
+
 ### 4. アプリケーションキー生成
 php artisan key:generate
 
