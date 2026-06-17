@@ -24,7 +24,7 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 
-Route::post('/register', [RegisterController::class, 'store']);
+//Route::post('/register', [RegisterController::class, 'store']);
 Route::get('/register', function () {
     return view('auth.register');
 });
@@ -126,6 +126,6 @@ Route::post('/login', function (LoginRequest $request) {
     }
 
     return back()->withErrors([
-        'email' => 'メールアドレスまたはパスワードが違います。',
+        'email' => 'ログイン情報が登録されていません',
     ]);
 })->name('login');

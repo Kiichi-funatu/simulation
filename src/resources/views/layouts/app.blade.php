@@ -25,12 +25,19 @@
 
     {{-- 右：メニュー（マイページ / 出品 / ログアウト） --}}
     <div class="header__right">
-        <a href="{{ route('mypage') }}" class="header-link">マイページ</a>
         
-        <form action="/logout" method="POST" class="logout-form">
-            @csrf
-            <button type="submit" class="header-link logout-btn">ログアウト</button>
-        </form>
+        @guest
+            <a href="{{ route('login') }}" class="header-link">ログイン</a>
+        @endguest
+
+        @auth
+            <form action="/logout" method="POST" class="logout-form">
+                @csrf
+                <button type="submit" class="header-link logout-btn">ログアウト</button>
+            </form>
+        @endauth
+
+        <a href="{{ route('mypage') }}" class="header-link">マイページ</a>
 
         <a href="{{ route('sell') }}" class="header-link-last">出品</a>
     </div>

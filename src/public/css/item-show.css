@@ -238,4 +238,22 @@
     font-size: 13px;
 }
 
+.info-title {
+    font-size: 18px;
+    font-weight: bold;
+    margin-top: 32px;
+    margin-bottom: 12px;
+    color: #333;
+}
 
+/* 商品説明の枠 */
+.item-description-box {
+    margin-bottom: 30px;
+}
+
+/* 商品説明のテキスト */
+.item-description {
+    font-size: 15px;
+    line-height: 1.7;
+    color: #333;
+}

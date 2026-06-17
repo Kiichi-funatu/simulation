@@ -53,6 +53,7 @@
                 <div class="address-box">
                     <p>〒{{ $user->postal_code }}</p>
                     <p>{{ $user->address }}</p>
+                    <p>{{ $user->building}}</p>
                     <a href="{{ route('purchase.address', $item->id) }}" class="address-edit">変更する</a>
                 </div>
             </div>

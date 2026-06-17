@@ -56,10 +56,10 @@
 
                 {{-- 未ログインは表示のみ --}}
                 @guest
-                    <span class="favorite-button">
+                    <a href="{{ route('login') }}" class="favorite-button">
                         <img src="{{ asset('images/ハートロゴ_デフォルト.png') }}" class="icon">
                         {{ $favoriteCount }}
-                    </span>
+                    </a>
                 @endguest
 
                 {{-- コメント数 --}}
@@ -74,6 +74,15 @@
             <a href="{{ route('purchase.index', $item->id) }}" class="purchase-button">
                 購入手続きへ
             </a>
+
+            {{-- ★★★ ここに商品説明を追加 ★★★ --}}
+            <h3 class="info-title">商品説明</h3>
+
+            <div class="item-description-box">
+                <p class="item-description">
+                    {!! nl2br(e($item->description)) !!}
+                </p>
+            </div>
 
             <h3 class="info-title">商品の情報</h3>
 
@@ -118,14 +127,14 @@
 
                         {{-- コメント内容（空なら placeholder 表示） --}}
                         <p class="comment-content">
-                            {{ $comment->comment ?: 'こちらにコメントが入ります。' }}
+                            {!! $comment->comment ? nl2br(e($comment->comment)) : 'こちらにこめんとがはいります。' !!}
                         </p>
 
                     </div>
                 @endforeach
 
-                {{-- コメント投稿フォーム（ログイン時のみ） --}}
-                @auth
+                {{-- コメント投稿フォーム --}}
+                
                     <form action="{{ route('comments.store', $item->id) }}" method="POST" class="comment-form">
                         @csrf
                         <textarea name="comment" class="comment-input" >{{ old('comment') }}</textarea>
@@ -136,7 +145,7 @@
 
                         <button type="submit" class="comment-submit">コメントを送信する</button>
                     </form>
-                @endauth
+                
 
             </div>
            

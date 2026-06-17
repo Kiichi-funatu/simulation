@@ -18,7 +18,14 @@ class ItemController extends Controller
         // 商品一覧タブ
         if ($tab === 'items') {
 
-            $query = Item::with(['images', 'condition', 'categories'])->where('user_id', '!=', Auth::id()); // ← 自分の商品を除外
+            /*$query = Item::with(['images', 'condition', 'categories'])->where('user_id', '!=', Auth::id()); */ // ← 自分の商品を除外,testで動かず変更
+
+            $userId = Auth::id();
+
+            $query = Item::with(['images', 'condition', 'categories'])
+                ->when($userId, function ($q) use ($userId) {
+                    $q->where('user_id', '!=', $userId);
+                });
 
             if ($request->filled('keyword')) {
                 $keyword = $request->keyword;
@@ -37,8 +44,9 @@ class ItemController extends Controller
         // マイリストタブ
         if ($tab === 'mylist') {
 
-            $query = Favorite::where('user_id', Auth::id())
-                            ->with('item.images');
+            $query = Favorite::where('user_id', Auth::id())->with(['item.images', 'item.purchase'])->whereHas('item', function ($q) {
+                    $q->where('user_id', '!=', Auth::id());
+            });
 
             if ($request->filled('keyword')) {
                 $keyword = $request->keyword;

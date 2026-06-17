@@ -64,6 +64,11 @@
             @foreach($favorites as $favorite)
                 <a href="{{ route('items.show', $favorite->item->id) }}" class="item-card">
                     <div class="item-image-area">
+
+                        @if($favorite->item->purchase)
+                            <span class="sold-label">Sold</span>
+                        @endif
+                    
                         @if($favorite->item->images->isNotEmpty())
                             <img src="{{ $favorite->item->images[0]->image_path }}" class="item-image">
                         @else
