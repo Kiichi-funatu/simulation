@@ -17,7 +17,7 @@
             メール認証を完了してください。
         </p>
 
-        <a href="#" class="verify-button">
+        <a href="{{ route('verification.notice') }}" class="verify-button">
             認証はこちらから
         </a>
 
